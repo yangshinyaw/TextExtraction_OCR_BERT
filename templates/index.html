@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extrakto</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/static/image/extraktoX.png" alt="EXTRAKTO Logo">
+        </div>
+        <div class="divider"></div>
+        <nav>
+            <a href="#container">Try It Now</a>
+            <div class="divider"></div>
+            <a href="#heroSection">Home</a>
+            <div class="divider"></div>
+            <a href="#aboutUs">About</a>
+            <div class="divider"></div>
+            <a href="#howItWorks">How It Works</a>
+            <div class="divider"></div>
+            <a href="#newsletter">Newsletter</a>
+        </nav>
+    </header>
+    
+
+    <div id="heroSection" class="hero">
+        <h1>Word Detection and TrOCR Extraction</h1>
+        <p>THE FUTURE OF TEXT RECOGNITION AND EXTRACTION.</p>
+        <a href="#container">
+            <button>Get Started</button>
+        </a>
+    </div>
+
+    <main>
+        <section id="aboutUs">
+            <h2>About</h2>
+            <div class="carousel-container">
+                <div class="carousel-slide active">
+                    <h3>Who We Are</h3>
+                    <p>We are a dedicated team from Holy Angel University working on cutting-edge technologies to make document scanning smarter and more accurate. Our mission is to transform handwritten documents into clean digital text using the latest OCR and NLP technologies.</p>
+                </div>
+                <div class="carousel-slide">
+                    <h3>Our Technology</h3>
+                    <p>Our app combines powerful Connected Component Analysis (CCA) with contour detection to precisely locate words in images. We also integrate TrOCR for text extraction, making it easier to convert complex documents into digital text with accuracy.</p>
+                </div>
+                <div class="carousel-slide">
+                    <h3>Meet the Team</h3>
+                    <p>Ken Dizon<br>Carlo Quilla<br>Patrick Simbahan<br>Shin Yang</p>
+                </div>
+            </div>
+            <!-- Carousel dots -->
+            <div class="carousel-dots">
+                <button class="dot active"></button>
+                <button class="dot"></button>
+                <button class="dot"></button>
+            </div>
+        </section>
+        
+        
+
+        <!-- How It Works Section -->
+        <section id="howItWorks">
+            <h2>How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="/static/image/upload-file.png" alt="Upload Icon">
+                    </div>
+                    <div class="step-text">
+                        <h3>Step 1</h3>
+                        <p>Upload an image using the <strong>New Upload</strong> button.</p>
+                    </div>
+                </div>
+        
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="/static/image/detect.png" alt="Detect Icon">
+                    </div>
+                    <div class="step-text">
+                        <h3>Step 2</h3>
+                        <p>Click the <strong>Detect Words</strong> button to allow the algorithm to detect words by line.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="/static/image/extract.png" alt="Extract Icon">
+                    </div>
+                    <div class="step-text">
+                        <h3>Step 3</h3>
+                        <p>Click the <strong>Extract Words</strong> button to extract the detected words from the uploaded image.</p>
+                    </div>
+                </div>
+                
+        
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="/static/image/save-file-option.png" alt="Save Icon">
+                    </div>
+                    <div class="step-text">
+                        <h3>Step 4</h3>
+                        <p>You can save the extracted text as an Excel file by clicking <strong>Save to Excel</strong>.</p>
+                    </div>
+                </div>
+        
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="/static/image/backspace-arrow.png" alt="Clear Icon">
+                    </div>
+                    <div class="step-text">
+                        <h3>Step 5</h3>
+                        <p>If you want to clear the workspace, click the <strong>Clear</strong> button.</p>
+                    </div>
+                </div>
+        
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="/static/image/repeat.png" alt="New Upload Icon">
+                    </div>
+                    <div class="step-text">
+                        <h3>Step 6</h3>
+                        <p>To start over with a new image, click the <strong>New Upload</strong> button again.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <input type="file" id="fileInput" accept="image/*" hidden>
+        <div id="container">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div id="loading" style="display:none; text-align:center;">
+            <div class="loading-ellipsis">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+            <p id="loadingText">Extracting text, this may take a moment...</p>
+        </div>
+        
+         
+        <div id="controls">
+            <button id="newUploadButton">New Upload</button>
+            <button id="detectButton" disabled>Detect Words</button>
+            <button id="extractButton" disabled>Extract Words</button>
+            <button id="saveExcelButton" disabled>Save to Excel</button>
+            <button id="clearButton">Clear</button>
+        </div>
+        
+        
+    
+        <div id="wordAndCorrectionContainer">
+            <div id="extractedContainer">
+                <h2>Extracted Words:</h2>
+                <ul id="predictedWords">
+                </ul>
+            </div>
+        
+            <div id="correctedContainer">
+                <h2>Corrected Words (BERT):</h2>
+                <ul id="correctedWords">
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Add this new section -->
+
+
+        <button id="deleteExcelContentButton" class="invisible-button"></button>
+        <div id="controls">
+            <div id="downloadLinkContainer"  class="styled-link">
+                Download Link
+            </div>
+            <button id="deleteExcelFileButton">Delete Excel Content</button>
+        </div>
+        
+    
+        <div class="features">
+            <div>
+                <img src="https://imagextracto.buzz//static/images/detect.png" alt="Detect Icon">
+
+                <h3>Detect Words</h3>
+                <p>Efficient word detection using advanced algorithms.</p>
+            </div>
+            <div>
+                <img src="https://imagextracto.buzz//static/images/extract.png" alt="Detect Icon">
+                <h3>Extract Text</h3>
+                <p>Accurate word extraction using the latest OCR technology.</p>
+            </div>
+        </div>
+
+        <section id="newsletter">
+            <h2>Subscribe to our Newsletter</h2>
+            <p>Get updates on the latest features and news.</p>
+            <form id="newsletterForm">
+                <input type="email" id="emailInput" placeholder="Enter your email" required />
+                <br />
+                <button type="submit">Subscribe</button>
+            </form>
+            <p id="thankYouMessage">Thank you for subscribing!</p>
+        </section>
+                    
+    </main>
+    
+
+    <footer>
+        <p>&copy; 2024 Extrakto Detection | <a href="#">Privacy</a> | <a href="#">Terms</a></p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://imagextracto.buzz/static/js/app.js"></script>
+</body>
+</html>

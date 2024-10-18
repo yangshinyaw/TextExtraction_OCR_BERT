@@ -1,0 +1,683 @@
+body {
+    font-family: 'Nunito', sans-serif; /* Elegant font with better readability */
+    margin: 0;
+    padding: 0;
+    background-color: #F5F7FA; /* Softer, lighter background */
+    color: #333;
+    line-height: 1.7;
+}
+
+header {
+    background-color: #0D1B2A;
+    color: #fff;
+    padding: 20px 40px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around; /* Evenly spaces out the items */
+    align-items: center;
+    width: 100%; /* Take up full width */
+    margin-left: 0;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding-bottom: 5px;
+    position: relative;
+    padding: 0 20px; /* Adds padding between links */
+    transition: color 0.3s ease;
+}
+
+header a:hover {
+    color: #4A90E2;
+}
+
+header a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #4A90E2;
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+header a:hover::after {
+    width: 100%;
+}
+
+.divider {
+    height: 20px;
+    width: 1px;
+    background-color: #fff;
+    margin: 0 20px;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    margin-right: 20px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #4A90E2, #78C0E0); /* Softer gradient */
+    color: white;
+    text-align: center;
+    padding: 120px 20px;
+    margin-top: 80px;
+}
+
+.hero h1 {
+    font-size: 3.8em;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero button {
+    padding: 15px 45px;
+    font-size: 1.2em;
+    background-color: #fff;
+    color: #357ABD;
+    border-radius: 50px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero button:hover {
+    background-color: #E8F0FE;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+main {
+    margin: 60px auto;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+#container {
+    padding: 30px;
+    margin: 30px auto;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 1200px; /* Change this to match the max-width of the main content */
+    height: auto;
+}
+
+
+canvas {
+    width: 80%; /* Increase the canvas width to be wider */
+    height: 80%; /* Adjust canvas height to match proportion */
+    border: 2px dashed #78C0E0;
+    border-radius: 8px; /* Rounded corners */
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto; /* Center the canvas horizontally */
+}
+
+#controls {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+#controls button {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 50px;
+    border: 2px solid #78C0E0;
+    background-color: #78C0E0;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#controls button:hover {
+    background-color: #4A90E2;
+    transform: translateY(-3px);
+}
+
+#wordAndCorrectionContainer {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 40px; /* Increase the gap between the two containers */
+}
+
+#extractedContainer, #correctedContainer {
+    width: 48%; /* Increase the width to take up more space */
+    padding: 30px; /* Increase padding for better content spacing */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+    font-size: 1.2em; /* Increase the font size */
+}
+
+#extractedContainer h2, #correctedContainer h2 {
+    margin-top: 0;
+    color: #000000;
+    font-size: 1.5em; /* Slightly larger font size for the headers */
+    border-bottom: 2px solid #4A90E2;
+    padding-bottom: 10px;
+}
+
+#predictedWords, #correctedWords {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    font-size: 1em;
+    color: #555;
+}
+
+#predictedWords li, #correctedWords li {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f4f7fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transition for smooth effects */
+    cursor: grab; /* Change the cursor to indicate the item is draggable */
+}
+
+#predictedWords li:hover, #correctedWords li:hover {
+    background-color: #e6f3ff; /* Change background color on hover */
+    transform: scale(1.05); /* Slightly enlarge the item on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Add more shadow on hover */
+    cursor: grabbing; /* Change the cursor to grabbing when hovered */
+}
+
+
+#predictedWords li span {
+    font-weight: bold;
+    color: #4A90E2;
+    margin-right: 10px;
+}
+
+#predictedWords button {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#predictedWords button:hover {
+    background-color: #357ABD;
+    transform: translateY(-2px);
+}
+
+#correctedWords li span {
+    font-weight: bold;
+    color: #357ABD;
+}
+
+#wordCount {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #357ABD;
+    font-weight: bold;
+}
+
+.features {
+    background-color: #F7F9FB;
+    padding: 60px 20px;
+}
+
+.features div {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.features div:hover {
+    transform: scale(1.08);
+}
+
+.features div img {
+    max-width: 80px;
+    margin-bottom: 20px;
+}
+
+#aboutUs {
+    background-color: #fff;
+    padding: 60px 20px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+#aboutUs h2 {
+    font-size: 2.5em;
+    color: #357ABD;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 3px solid #4A90E2;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+#howItWorks {
+    background-color: #ffffff; /* Soft background */
+    padding: 60px 20px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+#howItWorks h2 {
+    font-size: 2.5em;
+    color: #357ABD;
+    margin-bottom: 30px;
+    font-weight: bold;
+    border-bottom: 3px solid #4A90E2;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.step:hover {
+    transform: translateY(-5px); /* Small lift on hover */
+}
+
+.step-icon img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.step h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: #357ABD;
+}
+
+.step-text p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.step-text strong {
+    color: #4A90E2;
+}
+
+#howItWorks ol {
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.2em;
+}
+
+#howItWorks ol li {
+    margin-bottom: 15px;
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 30px;
+    background: linear-gradient(135deg, #f8fafc, #f5f9fc); /* Light blue gradient */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Depth effect */
+    overflow: hidden; /* Ensures clean edges */
+}
+
+.carousel-slide {
+    display: none;
+    padding: 40px;
+    font-size: 1.2em;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px); /* Subtle floating */
+    transition: opacity 0.8s ease, transform 0.8s ease; /* Smooth transition */
+}
+
+.carousel-slide.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Float to the right place */
+}
+
+/* Carousel Heading */
+.carousel-slide h3 {
+    font-size: 2.2em;
+    color: #003366; /* Deep blue */
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 3px solid #66a3ff;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+/* Carousel Dots */
+.carousel-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.carousel-dots button {
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    background-color: #99ccff;
+    border-radius: 50%;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-dots button.active {
+    background-color: #004080;
+    transform: scale(1.2); /* Enlarges active dot */
+}
+
+/* Fade-in Animation for Carousel Slides */
+.carousel-slide.active {
+    animation: fadeIn 1s ease both;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* List styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    background: #e6f3ff; /* Light background for list */
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+ul li:hover {
+    background-color: #cfe9ff; /* Lighter background on hover */
+    transform: scale(1.05); /* Subtle enlargement on hover */
+}
+
+
+footer {
+    background-color: #0D1B2A;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+footer a {
+    color: #4A90E2;
+    text-decoration: none;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+/* General container styles */
+#newsletter {
+    text-align: center;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #F7F9FB;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+}
+
+/* Heading styles */
+#newsletter h2 {
+    font-size: 2.5em;
+    color: #357ABD;
+    margin-bottom: 20px;
+}
+
+/* Paragraph text */
+#newsletter p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Input field styling */
+#newsletterForm input[type="email"] {
+    padding: 15px;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+/* Button styling */
+#newsletterForm button {
+    padding: 12px 30px;
+    font-size: 1.2em;
+    background-color: #357ABD;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Button hover effect */
+#newsletterForm button:hover {
+    background-color: #4A90E2;
+    transform: scale(1.05);
+}
+
+/* Thank you message */
+#thankYouMessage {
+    display: none;
+    font-size: 1.2em;
+    color: #4A90E2;
+    margin-top: 20px;
+}
+
+.dragging {
+    background-color: #cfe9ff; /* A distinct color to indicate the item is being dragged */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* More shadow to indicate the item is being picked up */
+    cursor: grabbing;
+}
+
+/* Loading Ellipsis Animation */
+.loading-ellipsis span {
+    display: inline-block;
+    font-size: 6em; /* Adjust the size for larger ellipsis */
+    color: #4A90E2; /* Your primary color */
+    animation: ellipsis 1s infinite;
+}
+
+.loading-ellipsis span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loading-ellipsis span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-ellipsis span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.invisible-button {
+    background-color: transparent;  /* No background */
+    border: none;  /* Remove border */
+    color: transparent;  /* Make text invisible */
+    padding: 0;  /* Remove padding */
+    width: 0;  /* Set width to 0 */
+    height: 0;  /* Set height to 0 */
+    cursor: default;  /* Remove the pointer cursor */
+}
+
+/* General Button and Link Styles */
+.styled-link, .styled-button {
+    background-color: #78C0E0; /* Light blue background */
+    border: none; /* Remove border */
+    color: white; /* White text */
+    padding: 12px 30px; /* Padding for a button-like feel */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline on the link */
+    display: inline-block; /* Allow block styling like a button */
+    font-size: 18px; /* Font size */
+    border-radius: 50px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover Effects */
+.styled-link:hover, .styled-button:hover {
+    background-color: #5a9ec2; /* Darker blue on hover */
+    transform: translateY(-3px); /* Slightly lift the button on hover */
+}
+
+/* Ensure the button and link are placed next to each other */
+#controls {
+    display: flex;
+    gap: 15px; /* Space between link and button */
+    justify-content: center; /* Centered alignment */
+}
+
+@keyframes ellipsis {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Text Effect: Fade-in and Scale */
+#loadingText {
+    font-size: 2em;
+    color: #357ABD;
+    animation: fadeInScale 1.5s ease-in-out infinite alternate;
+    letter-spacing: 1.5px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.logo img {
+    height: 60px; /* Adjust the size as needed */
+    width: 60px; /* Set width to the same value as height for a perfect circle */
+    border-radius: 50%; /* This makes the border circular */
+    border: 2px solid #fdfdfd; /* Thin, colored border around the logo */
+    padding: 5px; /* Padding inside the border */
+    background-color: rgb(2, 2, 2); /* Optional: Adds background to ensure logo stands out */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+/* Adjust logo size for smaller screens */
+@media (max-width: 768px) {
+    .logo img {
+        height: 60px; /* Smaller size for mobile screens */
+        width: 60px; /* Maintain circular shape */
+    }
+}
+
+
+/* Keyframes for Fade-in and Scale Effect */
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5em;
+    }
+
+    .hero p {
+        font-size: 1.1em;
+    }
+
+    #aboutUs p, #howItWorks p {
+        font-size: 1.1em;
+    }
+
+    .about-feature div {
+        flex-basis: 100%;
+        margin: 10px 0;
+    }
+}
